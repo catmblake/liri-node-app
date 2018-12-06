@@ -1,14 +1,16 @@
 require("dotenv").config();
 var keys = require('./keys.js')
+var fs = require("fs")
 // Add the code required to import the keys.js file and store it in a variable
-var Spotify = require('node-spotify-api');
-// axios & OMDB
+var Spotify = require("node-spotify-api");
 var axios = require("axios");
 var moment = require("moment");
+// axios & OMDB
 var movieName = process.argv.slice(3).join(" ");
 var omdbQueryUrl = `http://www.omdbapi.com/?t=${movieName}&y=&plot=short&apikey=trilogy`;
 // For command movie-this '<movie name here>'
-if (process.argv[2] === "movie-this" && movieName) {
+var command = process.argv[2];
+if (command === "movie-this" && movieName) {
     axios.get(omdbQueryUrl)
   .then(function (response) {
     movieThisResults(response);
@@ -16,7 +18,7 @@ if (process.argv[2] === "movie-this" && movieName) {
   .catch(function (error) {
     console.log(error);
   });
-} else if (process.argv[2] === "movie-this" && movieName === "") {
+} else if (command === "movie-this" && movieName === "") {
 omdbQueryUrl = `http://www.omdbapi.com/?t=mr+nobody&y=&plot=short&apikey=trilogy`;
 axios.get(omdbQueryUrl)
 .then(function (response) {
@@ -52,7 +54,7 @@ function movieThisResults(response){
 var band = process.argv.slice(3).join(" ");
 var bandsQueryUrl = `https://rest.bandsintown.com/artists/${band}/events?app_id=codingbootcamp`;
 // For the command concert-this '<artist name here>'
-if (process.argv[2] === "concert-this" && band) {
+if (command === "concert-this" && band) {
     axios.get(bandsQueryUrl)
   .then(function (response) {
       for (var i=0; i <response.data.length ; i++){
@@ -68,7 +70,7 @@ if (process.argv[2] === "concert-this" && band) {
   .catch(function (error) {
     console.log(error);
   });
-} else if (process.argv[2] === "concert-this" && band === "") {
+} else if (command === "concert-this" && band === "") {
   console.log("Please choose an artist");
 };
 
@@ -80,7 +82,7 @@ if (process.argv[2] === "concert-this" && band) {
 // Node-Spotify-API
 var spotify = new Spotify(keys.spotify);
 var song = process.argv.slice(3).join(" ");
-if (process.argv[2] === "spotify-this-song" && song) {
+if (command === "spotify-this-song" && song) {
 spotify
   .search({ type: 'track', query: song, limit: 1 })
   .then(function(response) {
@@ -89,7 +91,7 @@ spotify
   .catch(function(err) {
     console.log(err);
   });
-} else if (process.argv[2] === "spotify-this-song" && song === "") {
+} else if (command === "spotify-this-song" && song === "") {
   spotify
   .search({ type: 'track', query: "the sign ace of base", limit: 1 })
   .then(function(response) {
@@ -114,6 +116,20 @@ function spotifyThisResults(response){
 // The album that the song is from
 // If user doesn't choose song name give results for "The Sign" by Ace of Base
 
+if (command === "do-what-it-says") {
+  fs.readFile("random.txt", "utf8", function(error, data) {
+    if (error) {
+      return console.log(error);
+    }
+var input = data
+console.log(data);
+var inputArr = data.split(",")
+console.log(inputArr); 
+command = inputArr[0];
+var argument = inputArr[1];
+console.log(command + " " + argument);
+  })
+};
 // fs node package
 // For the command do-what-it-says the result should be:
 // It should run spotify-this-song for "I Want it That Way," as follows the text in random.txt.
