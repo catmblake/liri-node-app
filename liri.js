@@ -38,7 +38,15 @@ function movieThisResults(response){
       var plot = JSON.stringify(response.data.Plot, null, 2);
       var actors = JSON.stringify(response.data.Actors, null, 2);
       console.log(`Title: ${title}\nYear: ${year}\nIMDB Rating: ${imdbRating}\nRotten Tomatoes Rating: ${rotRating}\nCountry: ${country}\nLanguage: ${language}\nPlot: ${plot}\nActors: ${actors}`);
-};
+      fs.appendFile("log.txt", command + " " + movieName +", ", function(err){
+        if (err) {
+          console.log(err);
+        }
+        else {
+          console.log("content added");
+        }
+      })
+    };
 // respond with the following information in the terminal:
 // * Title of the movie.
 // * Year the movie came out.
@@ -121,8 +129,6 @@ if (command === "do-what-it-says") {
     if (error) {
       return console.log(error);
     }
-var input = data
-console.log(data);
 var inputArr = data.split(",")
 console.log(inputArr); 
 command = inputArr[0];
