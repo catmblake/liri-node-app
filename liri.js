@@ -1,19 +1,44 @@
+// requiring all of the packages needed to run this program
 require("dotenv").config();
 var keys = require('./keys.js')
 var fs = require("fs")
-// Add the code required to import the keys.js file and store it in a variable
 var Spotify = require("node-spotify-api");
 var axios = require("axios");
 var moment = require("moment");
-// axios & OMDB
+
+// declaring user inputs as global variables
+var command = process.argv[2];
 var argument = process.argv.slice(3).join(" ");
 var omdbQueryUrl = `http://www.omdbapi.com/?t=${argument}&y=&plot=short&apikey=trilogy`;
-// For command movie-this '<movie name here>'
-var command = process.argv[2];
+
+// declaring the function to record user input in the log.txt file
+function logCommand () {
+  fs.appendFile("log.txt", command + " " + argument +", ", function(err){
+    if (err) {
+      console.log(err);
+    }
+    else {
+      console.log("content added");
+    }
+  })
+}
+function movieThisResults(response){
+  var title = JSON.stringify(response.data.Title, null, 2);
+    var year = JSON.stringify(response.data.Year, null, 2);
+    var imdbRating = JSON.stringify(response.data.Ratings[0].Value, null, 2);
+    var rotRating = JSON.stringify(response.data.Ratings[1].Value, null, 2);
+    var country = JSON.stringify(response.data.Country, null, 2);
+    var language = JSON.stringify(response.data.Language, null, 2);
+    var plot = JSON.stringify(response.data.Plot, null, 2);
+    var actors = JSON.stringify(response.data.Actors, null, 2);
+    console.log(`Title: ${title}\nYear: ${year}\nIMDB Rating: ${imdbRating}\nRotten Tomatoes Rating: ${rotRating}\nCountry: ${country}\nLanguage: ${language}\nPlot: ${plot}\nActors: ${actors}`);
+  };
+
 if (command === "movie-this" && argument) {
     axios.get(omdbQueryUrl)
   .then(function (response) {
     movieThisResults(response);
+    logCommand();
   })
   .catch(function (error) {
     console.log(error);
@@ -23,35 +48,14 @@ omdbQueryUrl = `http://www.omdbapi.com/?t=mr+nobody&y=&plot=short&apikey=trilogy
 axios.get(omdbQueryUrl)
 .then(function (response) {
     movieThisResults(response);
+    logCommand();
 })
 .catch(function (error) {
   console.log(error);
 });
 }
-function movieThisResults(response){
-    var title = JSON.stringify(response.data.Title, null, 2);
-      var year = JSON.stringify(response.data.Year, null, 2);
-      var imdbRating = JSON.stringify(response.data.Ratings[0].Value, null, 2);
-      var rotRating = JSON.stringify(response.data.Ratings[1].Value, null, 2);
-      var country = JSON.stringify(response.data.Country, null, 2);
-      var language = JSON.stringify(response.data.Language, null, 2);
-      var plot = JSON.stringify(response.data.Plot, null, 2);
-      var actors = JSON.stringify(response.data.Actors, null, 2);
-      console.log(`Title: ${title}\nYear: ${year}\nIMDB Rating: ${imdbRating}\nRotten Tomatoes Rating: ${rotRating}\nCountry: ${country}\nLanguage: ${language}\nPlot: ${plot}\nActors: ${actors}`);
-      fs.appendFile("log.txt", command + " " + argument +", ", function(err){
-        if (err) {
-          console.log(err);
-        }
-        else {
-          console.log("content added");
-        }
-      })
-    };
 
-// axios & Bands In Town & moment
-// var band = process.argv.slice(3).join(" ");
 var bandsQueryUrl = `https://rest.bandsintown.com/artists/${argument}/events?app_id=codingbootcamp`;
-// For the command concert-this '<artist name here>'
 if (command === "concert-this" && argument) {
     axios.get(bandsQueryUrl)
   .then(function (response) {
@@ -71,7 +75,6 @@ if (command === "concert-this" && argument) {
   console.log("Please choose an artist");
 };
 
-// Node-Spotify-API
 function spotifyThis(command, argument){
 var spotify = new Spotify(keys.spotify);
 if (command === "spotify-this-song" && argument) {
@@ -108,37 +111,10 @@ if (command === "do-what-it-says") {
       return console.log(error);
     }
 var inputArr = data.split(",")
-console.log(inputArr); 
-command = inputArr[0];
-var argument = inputArr[1];
   spotifyThis(inputArr[0], inputArr[1]);
 })
 };
-
-// respond with the following information in the terminal:
-// * Title of the movie.
-// * Year the movie came out.
-// * IMDB Rating of the movie.
-// * Rotten Tomatoes Rating of the movie.
-// * Country where the movie was produced.
-// * Language of the movie.
-// * Plot of the movie.
-// * Actors in the movie.
-// If user doesn't choose movie name give results for Mr. Nobody
-
-// respond with the following information in the terminal:
-// Name of the venue
-// Venue location
-// Date of the Event (use moment to format this as "MM/DD/YYYY")
-
-// For the command spotify-this-song '<song name here>'
-// respond with the following information in the terminal:
-// Artist(s)
-// The song's name
-// A preview link of the song from Spotify
-// The album that the song is from
-// If user doesn't choose song name give results for "The Sign" by Ace of Base
-
+spotifyThis(command, argument);
 // fs node package
 // For the command do-what-it-says the result should be:
 // It should run spotify-this-song for "I Want it That Way," as follows the text in random.txt.
