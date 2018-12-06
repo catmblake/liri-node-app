@@ -1,10 +1,32 @@
-require("dotenv").config();
+// require("dotenv").config();
 
 // Add the code required to import the keys.js file and store it in a variable
-var spotify = new Spotify(keys.spotify);
+// var spotify = new Spotify(keys.spotify);
 
 // axios & OMDB
+var axios = require("axios");
+var movieName = process.argv.slice(3).join(" ");
+var omdbQueryUrl = `http://www.omdbapi.com/?t=${movieName}&y=&plot=short&apikey=trilogy`;
+console.log("This is the command: " +process.argv[2]);
+console.log("Movie Name: " + movieName);
+console.log("Query Url: " + omdbQueryUrl);
 // For command movie-this '<movie name here>'
+if (process.argv[2] === "movie-this") {
+    axios.get(omdbQueryUrl)
+  .then(function (response) {
+      console.log(JSON.stringify(response.data.Title, null, 2),
+      JSON.stringify(response.data.Year, null, 2),
+      JSON.stringify(response.data.Ratings[0].Value, null, 2),
+      JSON.stringify(response.data.Ratings[1].Value, null, 2),
+      JSON.stringify(response.data.Country, null, 2),
+      JSON.stringify(response.data.Language, null, 2),
+      JSON.stringify(response.data.Plot, null, 2),
+      JSON.stringify(response.data.Actors, null, 2))
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
 // respond with the following information in the terminal:
 // * Title of the movie.
 // * Year the movie came out.
