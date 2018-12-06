@@ -1,10 +1,10 @@
-// require("dotenv").config();
-
+require("dotenv").config();
+var keys = require('./keys.js')
 // Add the code required to import the keys.js file and store it in a variable
-// var spotify = new Spotify(keys.spotify);
-
+var Spotify = require('node-spotify-api');
 // axios & OMDB
 var axios = require("axios");
+var moment = require("moment");
 var movieName = process.argv.slice(3).join(" ");
 var omdbQueryUrl = `http://www.omdbapi.com/?t=${movieName}&y=&plot=short&apikey=trilogy`;
 // For command movie-this '<movie name here>'
@@ -49,24 +49,26 @@ function movieThisResults(response){
 // If user doesn't choose movie name give results for Mr. Nobody
 
 // axios & Bands In Town & moment
-var artist = process.argv.slice(3).join(" ");
-var bandsQueryUrl = `https://rest.bandsintown.com/artists/${artist}/events?app_id=codingbootcamp`;
+var band = process.argv.slice(3).join(" ");
+var bandsQueryUrl = `https://rest.bandsintown.com/artists/${band}/events?app_id=codingbootcamp`;
 // For the command concert-this '<artist name here>'
-if (process.argv[2] === "concert-this" && artist) {
+if (process.argv[2] === "concert-this" && band) {
     axios.get(bandsQueryUrl)
   .then(function (response) {
       for (var i=0; i <response.data.length ; i++){
       var concertVenue = response.data[i].venue.name;
       var city = response.data[i].venue.city;
       var country = response.data[i].venue.country;
-      var date = response.data[i].venue.datetime;
-    console.log(`Concert Venue: ${concertVenue}, \n Location: ${city}, ${country} \n Event Date: ${date}`);
+      var date = moment(response.data[i].venue.datetime);
+      var dateConverted = moment(date).format("MM/DD/YYYY")
+        // console.log(date);
+    console.log(`Concert Venue: ${concertVenue},\n Location: ${city}, ${country}\n Event Date: ${dateConverted}`);
   };
 })
   .catch(function (error) {
     console.log(error);
   });
-} else if (process.argv[2] === "concert-this" && artist === "") {
+} else if (process.argv[2] === "concert-this" && band === "") {
   console.log("Please choose an artist");
 };
 
@@ -76,6 +78,34 @@ if (process.argv[2] === "concert-this" && artist) {
 // Date of the Event (use moment to format this as "MM/DD/YYYY")
 
 // Node-Spotify-API
+var spotify = new Spotify(keys.spotify);
+var song = process.argv.slice(3).join(" ");
+if (process.argv[2] === "spotify-this-song" && song) {
+spotify
+  .search({ type: 'track', query: song, limit: 1 })
+  .then(function(response) {
+    spotifyThisResults(response);
+  })
+  .catch(function(err) {
+    console.log(err);
+  });
+} else if (process.argv[2] === "spotify-this-song" && song === "") {
+  spotify
+  .search({ type: 'track', query: "the sign ace of base", limit: 1 })
+  .then(function(response) {
+    spotifyThisResults(response);
+  })
+  .catch(function(err) {
+    console.log(err);
+  });
+};
+function spotifyThisResults(response){
+  var artist = response.tracks.items[0].artists[0].name;
+  var songName = response.tracks.items[0].name;
+  var album = response.tracks.items[0].album.name;
+  var songUrl = response.tracks.items[0].external_urls.spotify;
+  console.log(`Artist: ${artist}\nSong: ${songName}\nAlbum: ${album}\nLink: ${songUrl}`);
+}
 // For the command spotify-this-song '<song name here>'
 // respond with the following information in the terminal:
 // Artist(s)
