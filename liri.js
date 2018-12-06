@@ -6,11 +6,11 @@ var Spotify = require("node-spotify-api");
 var axios = require("axios");
 var moment = require("moment");
 // axios & OMDB
-var movieName = process.argv.slice(3).join(" ");
-var omdbQueryUrl = `http://www.omdbapi.com/?t=${movieName}&y=&plot=short&apikey=trilogy`;
+var argument = process.argv.slice(3).join(" ");
+var omdbQueryUrl = `http://www.omdbapi.com/?t=${argument}&y=&plot=short&apikey=trilogy`;
 // For command movie-this '<movie name here>'
 var command = process.argv[2];
-if (command === "movie-this" && movieName) {
+if (command === "movie-this" && argument) {
     axios.get(omdbQueryUrl)
   .then(function (response) {
     movieThisResults(response);
@@ -18,7 +18,7 @@ if (command === "movie-this" && movieName) {
   .catch(function (error) {
     console.log(error);
   });
-} else if (command === "movie-this" && movieName === "") {
+} else if (command === "movie-this" && argument === "") {
 omdbQueryUrl = `http://www.omdbapi.com/?t=mr+nobody&y=&plot=short&apikey=trilogy`;
 axios.get(omdbQueryUrl)
 .then(function (response) {
@@ -38,7 +38,7 @@ function movieThisResults(response){
       var plot = JSON.stringify(response.data.Plot, null, 2);
       var actors = JSON.stringify(response.data.Actors, null, 2);
       console.log(`Title: ${title}\nYear: ${year}\nIMDB Rating: ${imdbRating}\nRotten Tomatoes Rating: ${rotRating}\nCountry: ${country}\nLanguage: ${language}\nPlot: ${plot}\nActors: ${actors}`);
-      fs.appendFile("log.txt", command + " " + movieName +", ", function(err){
+      fs.appendFile("log.txt", command + " " + argument +", ", function(err){
         if (err) {
           console.log(err);
         }
@@ -47,22 +47,12 @@ function movieThisResults(response){
         }
       })
     };
-// respond with the following information in the terminal:
-// * Title of the movie.
-// * Year the movie came out.
-// * IMDB Rating of the movie.
-// * Rotten Tomatoes Rating of the movie.
-// * Country where the movie was produced.
-// * Language of the movie.
-// * Plot of the movie.
-// * Actors in the movie.
-// If user doesn't choose movie name give results for Mr. Nobody
 
 // axios & Bands In Town & moment
-var band = process.argv.slice(3).join(" ");
-var bandsQueryUrl = `https://rest.bandsintown.com/artists/${band}/events?app_id=codingbootcamp`;
+// var band = process.argv.slice(3).join(" ");
+var bandsQueryUrl = `https://rest.bandsintown.com/artists/${argument}/events?app_id=codingbootcamp`;
 // For the command concert-this '<artist name here>'
-if (command === "concert-this" && band) {
+if (command === "concert-this" && argument) {
     axios.get(bandsQueryUrl)
   .then(function (response) {
       for (var i=0; i <response.data.length ; i++){
@@ -71,35 +61,29 @@ if (command === "concert-this" && band) {
       var country = response.data[i].venue.country;
       var date = moment(response.data[i].venue.datetime);
       var dateConverted = moment(date).format("MM/DD/YYYY")
-        // console.log(date);
-    console.log(`Concert Venue: ${concertVenue},\n Location: ${city}, ${country}\n Event Date: ${dateConverted}`);
+    console.log(`Concert Venue: ${concertVenue},\nLocation: ${city}, ${country}\nEvent Date: ${dateConverted}`);
   };
 })
   .catch(function (error) {
     console.log(error);
   });
-} else if (command === "concert-this" && band === "") {
+} else if (command === "concert-this" && argument === "") {
   console.log("Please choose an artist");
 };
 
-// respond with the following information in the terminal:
-// Name of the venue
-// Venue location
-// Date of the Event (use moment to format this as "MM/DD/YYYY")
-
 // Node-Spotify-API
+function spotifyThis(command, argument){
 var spotify = new Spotify(keys.spotify);
-var song = process.argv.slice(3).join(" ");
-if (command === "spotify-this-song" && song) {
+if (command === "spotify-this-song" && argument) {
 spotify
-  .search({ type: 'track', query: song, limit: 1 })
+  .search({ type: 'track', query: argument, limit: 1 })
   .then(function(response) {
     spotifyThisResults(response);
   })
   .catch(function(err) {
     console.log(err);
   });
-} else if (command === "spotify-this-song" && song === "") {
+} else if (command === "spotify-this-song" && argument === "") {
   spotify
   .search({ type: 'track', query: "the sign ace of base", limit: 1 })
   .then(function(response) {
@@ -116,13 +100,7 @@ function spotifyThisResults(response){
   var songUrl = response.tracks.items[0].external_urls.spotify;
   console.log(`Artist: ${artist}\nSong: ${songName}\nAlbum: ${album}\nLink: ${songUrl}`);
 }
-// For the command spotify-this-song '<song name here>'
-// respond with the following information in the terminal:
-// Artist(s)
-// The song's name
-// A preview link of the song from Spotify
-// The album that the song is from
-// If user doesn't choose song name give results for "The Sign" by Ace of Base
+};
 
 if (command === "do-what-it-says") {
   fs.readFile("random.txt", "utf8", function(error, data) {
@@ -133,9 +111,34 @@ var inputArr = data.split(",")
 console.log(inputArr); 
 command = inputArr[0];
 var argument = inputArr[1];
-console.log(command + " " + argument);
-  })
+  spotifyThis(inputArr[0], inputArr[1]);
+})
 };
+
+// respond with the following information in the terminal:
+// * Title of the movie.
+// * Year the movie came out.
+// * IMDB Rating of the movie.
+// * Rotten Tomatoes Rating of the movie.
+// * Country where the movie was produced.
+// * Language of the movie.
+// * Plot of the movie.
+// * Actors in the movie.
+// If user doesn't choose movie name give results for Mr. Nobody
+
+// respond with the following information in the terminal:
+// Name of the venue
+// Venue location
+// Date of the Event (use moment to format this as "MM/DD/YYYY")
+
+// For the command spotify-this-song '<song name here>'
+// respond with the following information in the terminal:
+// Artist(s)
+// The song's name
+// A preview link of the song from Spotify
+// The album that the song is from
+// If user doesn't choose song name give results for "The Sign" by Ace of Base
+
 // fs node package
 // For the command do-what-it-says the result should be:
 // It should run spotify-this-song for "I Want it That Way," as follows the text in random.txt.
