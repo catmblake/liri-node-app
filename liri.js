@@ -49,7 +49,27 @@ function movieThisResults(response){
 // If user doesn't choose movie name give results for Mr. Nobody
 
 // axios & Bands In Town & moment
-// For the commandconcert-this '<artist name here>'
+var artist = process.argv.slice(3).join(" ");
+var bandsQueryUrl = `https://rest.bandsintown.com/artists/${artist}/events?app_id=codingbootcamp`;
+// For the command concert-this '<artist name here>'
+if (process.argv[2] === "concert-this" && artist) {
+    axios.get(bandsQueryUrl)
+  .then(function (response) {
+      for (var i=0; i <response.data.length ; i++){
+      var concertVenue = response.data[i].venue.name;
+      var city = response.data[i].venue.city;
+      var country = response.data[i].venue.country;
+      var date = response.data[i].venue.datetime;
+    console.log(`Concert Venue: ${concertVenue}, \n Location: ${city}, ${country} \n Event Date: ${date}`);
+  };
+})
+  .catch(function (error) {
+    console.log(error);
+  });
+} else if (process.argv[2] === "concert-this" && artist === "") {
+  console.log("Please choose an artist");
+};
+
 // respond with the following information in the terminal:
 // Name of the venue
 // Venue location
