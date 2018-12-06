@@ -11,14 +11,7 @@ var omdbQueryUrl = `http://www.omdbapi.com/?t=${movieName}&y=&plot=short&apikey=
 if (process.argv[2] === "movie-this" && movieName) {
     axios.get(omdbQueryUrl)
   .then(function (response) {
-      console.log(JSON.stringify(response.data.Title, null, 2),
-      JSON.stringify(response.data.Year, null, 2),
-      JSON.stringify(response.data.Ratings[0].Value, null, 2),
-      JSON.stringify(response.data.Ratings[1].Value, null, 2),
-      JSON.stringify(response.data.Country, null, 2),
-      JSON.stringify(response.data.Language, null, 2),
-      JSON.stringify(response.data.Plot, null, 2),
-      JSON.stringify(response.data.Actors, null, 2))
+    movieThisResults(response);
   })
   .catch(function (error) {
     console.log(error);
@@ -27,19 +20,23 @@ if (process.argv[2] === "movie-this" && movieName) {
 omdbQueryUrl = `http://www.omdbapi.com/?t=mr+nobody&y=&plot=short&apikey=trilogy`;
 axios.get(omdbQueryUrl)
 .then(function (response) {
-    console.log(JSON.stringify(response.data.Title, null, 2),
-    JSON.stringify(response.data.Year, null, 2),
-    JSON.stringify(response.data.Ratings[0].Value, null, 2),
-    JSON.stringify(response.data.Ratings[1].Value, null, 2),
-    JSON.stringify(response.data.Country, null, 2),
-    JSON.stringify(response.data.Language, null, 2),
-    JSON.stringify(response.data.Plot, null, 2),
-    JSON.stringify(response.data.Actors, null, 2))
+    movieThisResults(response);
 })
 .catch(function (error) {
   console.log(error);
 });
 }
+function movieThisResults(response){
+    var title = JSON.stringify(response.data.Title, null, 2);
+      var year = JSON.stringify(response.data.Year, null, 2);
+      var imdbRating = JSON.stringify(response.data.Ratings[0].Value, null, 2);
+      var rotRating = JSON.stringify(response.data.Ratings[1].Value, null, 2);
+      var country = JSON.stringify(response.data.Country, null, 2);
+      var language = JSON.stringify(response.data.Language, null, 2);
+      var plot = JSON.stringify(response.data.Plot, null, 2);
+      var actors = JSON.stringify(response.data.Actors, null, 2);
+      console.log(`Title: ${title}\nYear: ${year}\nIMDB Rating: ${imdbRating}\nRotten Tomatoes Rating: ${rotRating}\nCountry: ${country}\nLanguage: ${language}\nPlot: ${plot}\nActors: ${actors}`);
+};
 // respond with the following information in the terminal:
 // * Title of the movie.
 // * Year the movie came out.
