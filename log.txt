@@ -1,24 +1,79 @@
- movie-this big trouble in little china
- movie-this 
- concert-this red hot chili peppers
- spotify-this-song 
- spotify-this-song back in black
- do-what-it-says 
- do-what-it-says 
- concert-this pink
- concert-this pink
- do-what-it-says 
- do-what-it-says 
- do-what-it-says 
- do-what-it-says 
- do-what-it-says 
- do-what-it-says 
- do-what-it-says 
- concert-this john legend
- concert-this john legend
- concert-this john legend
- concert-this john legend
- concert-this john legend
- concert-this maroon 5
- concert-this red hot chili peppers
- 
+Command: movie-this Mr Nobody
+Results:
+Title: "Mr. Nobody"
+Year: "2009"
+IMDB Rating: "7.9/10"
+Rotten Tomatoes Rating: "67%"
+Country: "Belgium, Germany, Canada, France, USA, UK"
+Language: "English, Mohawk"
+Plot: "A boy stands on a station platform as a train is about to leave. Should he go with his mother or stay with his father? Infinite possibilities arise from this decision. As long as he doesn't choose, anything is possible."
+Actors: "Jared Leto, Sarah Polley, Diane Kruger, Linh Dan Pham"Command: movie-this days of thunder
+Results:
+Title: "Days of Thunder"
+Year: "1990"
+IMDB Rating: "5.9/10"
+Rotten Tomatoes Rating: "39%"
+Country: "USA"
+Language: "English, French"
+Plot: "A young hot-shot stock car driver gets his chance to compete at the top level."
+Actors: "Tom Cruise, Nicole Kidman, Robert Duvall, Randy Quaid"
+Command: concert-this
+Please choose and artist
+Command: concert-this maroon 5
+Results:
+Mandalay Bay Events Center, Las Vegas, NV, United States on 12/30/2018
+Mandalay Bay Events Center, Las Vegas, NV, United States on 12/31/2018
+Brisbane Entertainment Centre, Brisbane, , Australia on 02/19/2019
+Qudos Bank Arena, Sydney, , Australia on 02/21/2019
+Tokyo Dome, Tokyo, Tokyo, Japan on 02/25/2019
+Rod Laver Arena, Melbourne, , Australia on 02/22/2019
+Gocheok Sky Dome, Seoul, , South Korea on 02/27/2019
+TBA, Kaohsiung City, , Taiwan on 03/01/2019
+TBA, Macau, , Macau on 03/03/2019
+SM Mall Of Asia, Manila, , Philippines on 03/05/2019
+NATIONAL STADIUM, Singapore, , Singapore on 03/07/2019
+CHALLENGER HALL, Bangkok, , Thailand on 03/09/2019
+Mollenpark, Aalborg, , Denmark on 06/01/2019
+Lanxess Arena, Cologne, , Germany on 06/03/2019
+O2 ARENA, Prague, , Czech Republic on 06/05/2019
+Tauron Arena, Kraków, , Poland on 06/06/2019
+Ziggo Dome, Amsterdam, , Netherlands on 06/10/2019
+AccorHotels Arena, Paris, , France on 06/11/2019
+Command: spotify-this-song the sign ace of base
+Results:
+Artist: Ace of Base
+Song: The Sign
+Album: The Sign (US Album) [Remastered]
+Link: https://open.spotify.com/track/0hrBpAOgrt8RXigk83LLNE
+Command: spotify-this-song back in black
+Results:
+Artist: AC/DC
+Song: Back In Black
+Album: Back In Black
+Link: https://open.spotify.com/track/08mG3Y1vljYA6bvDt4Wqkj
+Command: do-what-it-says "I Want it That Way"
+Results:
+Artist: Backstreet Boys
+Song: I Want It That Way
+Album: The Hits--Chapter One
+Link: https://open.spotify.com/track/6e40mgJiCid5HRAGrbpGA6
+Command: movie-this titanic
+Results:
+Title: "Titanic"
+Year: "1997"
+IMDB Rating: "7.8/10"
+Rotten Tomatoes Rating: "89%"
+Country: "USA"
+Language: "English, Swedish"
+Plot: "A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic."
+Actors: "Leonardo DiCaprio, Kate Winslet, Billy Zane, Kathy Bates"
+Command: movie-this titanic
+Results:
+Title: Titanic
+Year: "1997"
+IMDB Rating: "7.8/10"
+Rotten Tomatoes Rating: "89%"
+Country: "USA"
+Language: "English, Swedish"
+Plot: "A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic."
+Actors: "Leonardo DiCaprio, Kate Winslet, Billy Zane, Kathy Bates"

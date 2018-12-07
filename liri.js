@@ -11,8 +11,8 @@ var command = process.argv[2];
 var argument = process.argv.slice(3).join(" ");
 
 // declaring function to record user input in the log.txt file
-function logCommand() {
-  fs.appendFile("log.txt", command + " " + argument + "\n ", function (err) {
+function logCommand(param) {
+  fs.appendFile("log.txt", param, function (err) {
     if (err) {
       console.log(err);
     }
@@ -31,8 +31,9 @@ function axiosGetMovie(argument) {
       var language = JSON.stringify(response.data.Language, null, 2);
       var plot = JSON.stringify(response.data.Plot, null, 2);
       var actors = JSON.stringify(response.data.Actors, null, 2);
-      console.log(`Title: ${title}\nYear: ${year}\nIMDB Rating: ${imdbRating}\nRotten Tomatoes Rating: ${rotRating}\nCountry: ${country}\nLanguage: ${language}\nPlot: ${plot}\nActors: ${actors}`);
-      logCommand();
+      var movieInfo = `Title: ${title}\nYear: ${year}\nIMDB Rating: ${imdbRating}\nRotten Tomatoes Rating: ${rotRating}\nCountry: ${country}\nLanguage: ${language}\nPlot: ${plot}\nActors: ${actors}`;
+      console.log(movieInfo);
+      logCommand(`Command: ${command} ${argument}\nResults:\n${movieInfo}\n`);
     })
     .catch(function (error) {
       console.log(error);
@@ -40,6 +41,7 @@ function axiosGetMovie(argument) {
 };
 // declaring function for axios concert data retrieval from bands in town and display results
 function axiosGetConcert(argument) {
+  logCommand(`Command: ${command} ${argument}\nResults:\n`);
   var bandsQueryUrl = `https://rest.bandsintown.com/artists/${argument}/events?app_id=codingbootcamp`;
   axios.get(bandsQueryUrl)
     .then(function (response) {
@@ -49,18 +51,18 @@ function axiosGetConcert(argument) {
         var city = response.data[i].venue.city;
         var region = response.data[i].venue.region;
         var country = response.data[i].venue.country;
-        var date = moment(response.data[i].venue.datetime);
-        var dateConverted = moment(date).format("MM/DD/YYYY")
+        var date = moment(response.data[i].datetime);
+        var dateConverted = moment(date).format("MM/DD/YYYY");
         console.log(`${i+1}. ${concertVenue}, ${city}, ${region}, ${country} on ${dateConverted}`);
+        logCommand(`${concertVenue}, ${city}, ${region}, ${country} on ${dateConverted}\n`);
       };
-      logCommand();
     })
     .catch(function (error) {
       console.log(error);
     })
 };
 // declaring function for spotify data retrieval and display results
-function spotifyThis(command, argument) {
+function spotifyThis(argument) {
   var spotify = new Spotify(keys.spotify);
   spotify
     .search({ type: 'track', query: argument, limit: 1 })
@@ -69,8 +71,9 @@ function spotifyThis(command, argument) {
       var songName = response.tracks.items[0].name;
       var album = response.tracks.items[0].album.name;
       var songUrl = response.tracks.items[0].external_urls.spotify;
-      console.log(`Artist: ${artist}\nSong: ${songName}\nAlbum: ${album}\nLink: ${songUrl}`);
-      logCommand();
+      var spotifyInfo = `Artist: ${artist}\nSong: ${songName}\nAlbum: ${album}\nLink: ${songUrl}`;
+      console.log(spotifyInfo);
+      logCommand(`Command: ${command} ${argument}\nResults:\n${spotifyInfo}\n`);
     })
     .catch(function (err) {
       console.log(err);
@@ -86,13 +89,14 @@ if (command === "movie-this" && argument) {
 if (command === "concert-this" && argument) {
   axiosGetConcert(argument);
 } else if (command === "concert-this" && !argument) {
+  logCommand(`Command: ${command}\nPlease choose and artist\n`);
   console.log("Please choose an artist");
 };
 // setting conditions to run spotify function for the user's selected song or the sign
 if (command === "spotify-this-song" && argument) {
-  spotifyThis(command, argument);
+  spotifyThis(argument);
 } else if (command === "spotify-this-song" && !argument) {
-  spotifyThis(command, "the sign ace of base");
+  spotifyThis("the sign ace of base");
 };
 // setting condition read random.txt and run the specified command and argument it contains
 if (command === "do-what-it-says") {
@@ -102,7 +106,7 @@ if (command === "do-what-it-says") {
     }
     var inputArr = data.split(",");
     if (inputArr[0] === "spotify-this-song") {
-    spotifyThis(inputArr[0], inputArr[1]);
+    spotifyThis(inputArr[1]);
     } else if (inputArr[0] === "concert-this") {
       axiosGetConcert(inputArr[1]);
     } else if (inputArr[0] === "movie-this") {
