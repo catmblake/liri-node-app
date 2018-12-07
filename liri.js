@@ -1,7 +1,7 @@
 // requiring all of the packages needed to run this program
 require("dotenv").config();
-var keys = require('./keys.js')
-var fs = require("fs")
+var keys = require('./keys.js');
+var fs = require("fs");
 var Spotify = require("node-spotify-api");
 var axios = require("axios");
 var moment = require("moment");
@@ -10,18 +10,15 @@ var moment = require("moment");
 var command = process.argv[2];
 var argument = process.argv.slice(3).join(" ");
 
-// declaring the function to record user input in the log.txt file
+// declaring function to record user input in the log.txt file
 function logCommand() {
-  fs.appendFile("log.txt", command + " " + argument + ", ", function (err) {
+  fs.appendFile("log.txt", command + " " + argument + "\n ", function (err) {
     if (err) {
       console.log(err);
     }
-    else {
-      console.log("content added");
-    }
   })
-}
-// declaring function for axios movie data retrieval
+};
+// declaring function for axios movie data retrieval from omdb and display results
 function axiosGetMovie(argument) {
   var omdbQueryUrl = `http://www.omdbapi.com/?t=${argument}&y=&plot=short&apikey=trilogy`;
   axios.get(omdbQueryUrl)
@@ -39,8 +36,9 @@ function axiosGetMovie(argument) {
     })
     .catch(function (error) {
       console.log(error);
-    });
-}
+    })
+};
+// declaring function for axios concert data retrieval from bands in town and display results
 function axiosGetConcert() {
   var bandsQueryUrl = `https://rest.bandsintown.com/artists/${argument}/events?app_id=codingbootcamp`;
   axios.get(bandsQueryUrl)
@@ -57,8 +55,9 @@ function axiosGetConcert() {
     })
     .catch(function (error) {
       console.log(error);
-    });
-}
+    })
+};
+// declaring function for spotify data retrieval and display results
 function spotifyThis(command, argument) {
   var spotify = new Spotify(keys.spotify);
   spotify
@@ -73,27 +72,27 @@ function spotifyThis(command, argument) {
     })
     .catch(function (err) {
       console.log(err);
-    });
-}
-
+    })
+};
+// setting conditions to run get movie function for the user's selected movie or Mr. Nobody
 if (command === "movie-this" && argument) {
   axiosGetMovie(argument);
 } else if (command === "movie-this" && !argument) {
   axiosGetMovie("Mr Nobody");
-}
-
+};
+// setting conditions to run get concert function for the user's selected artist
 if (command === "concert-this" && argument) {
   axiosGetConcert();
 } else if (command === "concert-this" && !argument) {
   console.log("Please choose an artist");
 };
-
+// setting conditions to run spotify function for the user's selected song or the sign
 if (command === "spotify-this-song" && argument) {
   spotifyThis(command, argument);
 } else if (command === "spotify-this-song" && !argument) {
   spotifyThis(command, "the sign ace of base");
 };
-
+// setting condition read random.txt and run the specified command and argument it contains
 if (command === "do-what-it-says") {
   fs.readFile("random.txt", "utf8", function (error, data) {
     if (error) {
@@ -103,7 +102,3 @@ if (command === "do-what-it-says") {
     spotifyThis(inputArr[0], inputArr[1]);
   })
 };
-
-// BONUS: log each of the commands made in the terminal to the log.txt file (append)
-// If all works save and write markup with video etc to github and try to incorporate 
-// inquirer to get the users input
