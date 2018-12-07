@@ -24,3 +24,10 @@ liri.js can take in the following commands:
 4. **do-what-it-says**
   - This command will read from the random.txt file and perform the command that is present in that document.
 LIRI logs each valid command entered and the corresponding results in the log.txt file.
+
+### LIRI in Action
+![movie-this](https://github.com/catmblake/liri-node-app/blob/master/images/movie-this-moviename.png)
+![concert-this](https://github.com/catmblake/liri-node-app/blob/master/images/concert-this-artistname.png)
+![spotify-this-song](https://github.com/catmblake/liri-node-app/blob/master/images/spotify-this-song-songname.png)
+![do-what-it-says](https://github.com/catmblake/liri-node-app/blob/master/images/do-what-it-says-2.png)
+
