@@ -22,38 +22,33 @@ function logCommand () {
     }
   })
 }
-function movieThisResults(response){
-  var title = JSON.stringify(response.data.Title, null, 2);
-    var year = JSON.stringify(response.data.Year, null, 2);
-    var imdbRating = JSON.stringify(response.data.Ratings[0].Value, null, 2);
-    var rotRating = JSON.stringify(response.data.Ratings[1].Value, null, 2);
-    var country = JSON.stringify(response.data.Country, null, 2);
-    var language = JSON.stringify(response.data.Language, null, 2);
-    var plot = JSON.stringify(response.data.Plot, null, 2);
-    var actors = JSON.stringify(response.data.Actors, null, 2);
-    console.log(`Title: ${title}\nYear: ${year}\nIMDB Rating: ${imdbRating}\nRotten Tomatoes Rating: ${rotRating}\nCountry: ${country}\nLanguage: ${language}\nPlot: ${plot}\nActors: ${actors}`);
-  };
-
-if (command === "movie-this" && argument) {
-    axios.get(omdbQueryUrl)
-  .then(function (response) {
-    movieThisResults(response);
-    logCommand();
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-} else if (command === "movie-this" && argument === "") {
-omdbQueryUrl = `http://www.omdbapi.com/?t=mr+nobody&y=&plot=short&apikey=trilogy`;
-axios.get(omdbQueryUrl)
+// declaring function for axios movie data retrieval
+function axiosGetMovie(){
+  axios.get(omdbQueryUrl)
 .then(function (response) {
-    movieThisResults(response);
-    logCommand();
+  var title = JSON.stringify(response.data.Title, null, 2);
+  var year = JSON.stringify(response.data.Year, null, 2);
+  var imdbRating = JSON.stringify(response.data.Ratings[0].Value, null, 2);
+  var rotRating = JSON.stringify(response.data.Ratings[1].Value, null, 2);
+  var country = JSON.stringify(response.data.Country, null, 2);
+  var language = JSON.stringify(response.data.Language, null, 2);
+  var plot = JSON.stringify(response.data.Plot, null, 2);
+  var actors = JSON.stringify(response.data.Actors, null, 2);
+  console.log(`Title: ${title}\nYear: ${year}\nIMDB Rating: ${imdbRating}\nRotten Tomatoes Rating: ${rotRating}\nCountry: ${country}\nLanguage: ${language}\nPlot: ${plot}\nActors: ${actors}`);
+  logCommand();
 })
 .catch(function (error) {
   console.log(error);
 });
 }
+// function movieThis(command, argument){
+  if (command === "movie-this" && argument) {
+    axiosGetMovie();
+} else if (command === "movie-this" && !argument) {
+omdbQueryUrl = `http://www.omdbapi.com/?t=mr+nobody&y=&plot=short&apikey=trilogy`;
+axiosGetMovie();
+}
+// }
 
 var bandsQueryUrl = `https://rest.bandsintown.com/artists/${argument}/events?app_id=codingbootcamp`;
 if (command === "concert-this" && argument) {
