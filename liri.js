@@ -89,8 +89,8 @@ if (command === "movie-this" && argument) {
 if (command === "concert-this" && argument) {
   axiosGetConcert(argument);
 } else if (command === "concert-this" && !argument) {
-  logCommand(`Command: ${command}\nPlease choose and artist\n`);
-  console.log("Please choose an artist");
+  logCommand(`Command: ${command}\nPlease choose and artist and try again\n`);
+  console.log("Please choose an artist and try again");
 };
 // setting conditions to run spotify function for the user's selected song or the sign
 if (command === "spotify-this-song" && argument) {
