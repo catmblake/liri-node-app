@@ -1,140 +1,55 @@
-Command: movie-this days of thunder
+Command: movie-this avatar
 Results:
-Title: Days of Thunder
-Year: 1990
-IMDB Rating: 5.9/10
-Rotten Tomatoes Rating: 39%
-Country: USA
-Language: English, French
-Plot: A young hot-shot stock car driver gets his chance to compete at the top level.
-Actors: Tom Cruise, Nicole Kidman, Robert Duvall, Randy Quaid
+Title: Avatar
+Year: 2009
+IMDB Rating: 7.8/10
+Rotten Tomatoes Rating: 83%
+Country: UK, USA
+Language: English, Spanish
+Plot: A paraplegic marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.
+Actors: Sam Worthington, Zoe Saldana, Sigourney Weaver, Stephen Lang
+Command: movie-this Mr Nobody
+Results:
+Title: Mr. Nobody
+Year: 2009
+IMDB Rating: 7.9/10
+Rotten Tomatoes Rating: 67%
+Country: Belgium, Germany, Canada, France, USA, UK
+Language: English, Mohawk
+Plot: A boy stands on a station platform as a train is about to leave. Should he go with his mother or stay with his father? Infinite possibilities arise from this decision. As long as he doesn't choose, anything is possible.
+Actors: Jared Leto, Sarah Polley, Diane Kruger, Linh Dan Pham
 Command: concert-this
-Please choose and artist
-Command: concert-this red hot chili peppers
+Please choose an artist and try again
+Command: concert-this john legend
 Results:
-Derwent Entertainment Centre, Glenorchy, , Australia on 02/17/2019
-Mt Duneed Estate, Waurn Ponds, , Australia on 03/02/2019
-Hope Estate, Pokolbin, , Australia on 02/23/2019
-Spark Arena, Auckland, , New Zealand on 03/09/2019
-Spark Arena, Auckland, , New Zealand on 03/08/2019
-nib Stadium, Perth, , Australia on 03/05/2019
+Turning Stone Resort Casino, Verona, NY, United States on 12/07/2018
+Palace Theatre, Columbus, OH, United States on 12/09/2018
+Old National Centre, Indianapolis, IN, United States on 12/10/2018
+The Riverside Theater, Milwaukee, WI, United States on 12/12/2018
+Civic Opera House, Chicago, IL, United States on 12/13/2018
+Bellco Theatre, Denver, CO, United States on 12/15/2018
+Abravanel Hall, Salt Lake City, UT, United States on 12/16/2018
+WaMu Theater, Seattle, WA, United States on 12/18/2018
+Arlene Schnitzer Concert Hall, Portland, OR, United States on 12/19/2018
+Fox Theater, Oakland, CA, United States on 12/21/2018
+Microsoft Theater, Los Angeles, CA, United States on 12/23/2018
+Segerstrom Center for the Arts, Costa Mesa, CA, United States on 12/29/2018
+San Diego Civic Theatre, San Diego, CA, United States on 12/30/2018
+Command: spotify-this-song the sign ace of base
+Results:
+Artist: Ace of Base
+Song: The Sign
+Album: The Sign (US Album) [Remastered]
+Link: https://open.spotify.com/track/0hrBpAOgrt8RXigk83LLNE
 Command: spotify-this-song back in black
 Results:
 Artist: AC/DC
 Song: Back In Black
 Album: Back In Black
 Link: https://open.spotify.com/track/08mG3Y1vljYA6bvDt4Wqkj
-Command: spotify-this-song back in black
-Results:
-Artist: AC/DC
-Song: Back In Black
-Album: Back In Black
-Link: https://open.spotify.com/track/08mG3Y1vljYA6bvDt4Wqkj
-Command: do-what-it-says "I Want it That Way"
+Command: do-what-it-says "I Want It That Way"
 Results:
 Artist: Backstreet Boys
 Song: I Want It That Way
 Album: The Hits--Chapter One
 Link: https://open.spotify.com/track/6e40mgJiCid5HRAGrbpGA6
-Command: do-what-it-says "hidden figures"
-Results:
-Title: Hidden Figures
-Year: 2016
-IMDB Rating: 7.8/10
-Rotten Tomatoes Rating: 93%
-Country: USA
-Language: English
-Plot: The story of a team of female African-American mathematicians who served a vital role in NASA during the early years of the U.S. space program.
-Actors: Taraji P. Henson, Octavia Spencer, Janelle Monáe, Kevin Costner
-Command: do-what-it-says backstreet boys
-Results:
-96.5 All Star Christmas - Backstreet Boys w/ Special Guests Gavin DeGraw & AJR, Montville, CT, United States on 12/14/2018
-Planet Hollywood Resort & Casino	- Las Vegas, Las Vegas, NV, United States on 02/06/2019
-Merry Mix Show 2018 featuring Backstreet Boys, Cedar Park, TX, United States on 12/16/2018
-Planet Hollywood Resort & Casino	- Las Vegas, Las Vegas, NV, United States on 02/08/2019
-Planet Hollywood Resort & Casino	- Las Vegas, Las Vegas, NV, United States on 02/09/2019
-Planet Hollywood Resort & Casino	- Las Vegas, Las Vegas, NV, United States on 02/13/2019
-Planet Hollywood Resort & Casino	- Las Vegas, Las Vegas, NV, United States on 02/15/2019
-Planet Hollywood Resort & Casino	- Las Vegas, Las Vegas, NV, United States on 02/16/2019
-Planet Hollywood Resort & Casino	- Las Vegas, Las Vegas, NV, United States on 02/20/2019
-Planet Hollywood Resort & Casino	- Las Vegas, Las Vegas, NV, United States on 02/22/2019
-Planet Hollywood Resort & Casino	- Las Vegas, Las Vegas, NV, United States on 02/23/2019
-Planet Hollywood Resort & Casino	- Las Vegas, Las Vegas, NV, United States on 04/10/2019
-Planet Hollywood Resort & Casino	- Las Vegas, Las Vegas, NV, United States on 04/12/2019
-Planet Hollywood Resort & Casino	- Las Vegas, Las Vegas, NV, United States on 04/17/2019
-Planet Hollywood Resort & Casino	- Las Vegas, Las Vegas, NV, United States on 04/20/2019
-Planet Hollywood Resort & Casino	- Las Vegas, Las Vegas, NV, United States on 04/24/2019
-Planet Hollywood Resort & Casino	- Las Vegas, Las Vegas, NV, United States on 04/26/2019
-Planet Hollywood Resort & Casino	- Las Vegas, Las Vegas, NV, United States on 04/27/2019
-Altice Arena, Lisbon, , Portugal on 05/11/2019
-Wizink Arena, Madrid, , Spain on 05/13/2019
-Forum , Milan, , Italy on 05/15/2019
-Palau San Jordi, Barcelona, , Spain on 05/17/2019
-Accorhotels, Paris, , France on 05/19/2019
-TUI Arena, Hannover, , Germany on 05/21/2019
-Sportpalais, Antwerp, , Belgium on 05/22/2019
-Ziggo Dome, Amsterdam, , Netherlands on 05/23/2019
-SAP Arena, Mannheim, , Germany on 05/25/2019
-Olympiahalle, Munich, , Germany on 05/27/2019
-Stadhalle, Vienna, , Austria on 05/28/2019
-Mercedes-Benz Arena, Berlin, , Germany on 05/29/2019
-Scandinavium, Gothenburg, , Sweden on 05/31/2019
-Spektrum, Oslo, , Norway on 06/01/2019
-Ericsson Globe, Stockholm, , Sweden on 06/02/2019
-Hartwell Arena, Helsinki, , Finland on 06/05/2019
-Royal Arena, Copenhagen, , Denmark on 06/08/2019
-Manchester Arena, Manchester, , United Kingdom on 06/10/2019
-3Arena, Dublin, , Ireland on 06/11/2019
-Hydro Arena, Glasgow, , United Kingdom on 06/14/2019
-Barclaycard Arena, Birmingham, , United Kingdom on 06/15/2019
-O2 Arena, London, , United Kingdom on 06/17/2019
-O2 Arena, London, , United Kingdom on 06/18/2019
-Lanxness Arena, Cologne, , Germany on 06/20/2019
-Hallenstadion, Zurich, , Switzerland on 06/21/2019
-O2 Arena, Prague, , Czech Republic on 06/22/2019
-Torwar Arena, Warsaw, , Poland on 06/24/2019
-Sports Arena, Budapest, , Hungary on 06/25/2019
-Capital One Arena, Washington, DC, United States on 07/12/2019
-Bell Centre, Montreal, , Canada on 07/15/2019
-ScotiaBank Arena, Toronto, , Canada on 07/17/2019
-Xcel Energy Center, Minneapolis, MN, United States on 07/20/2019
-Bell MTS Place, Winnipeg, , Canada on 07/22/2019
-ScotiaBank Saddledome, Calgary, , Canada on 07/24/2019
-Rogers Place, Edmonton, , Canada on 07/25/2019
-Pepsi Live at Rogers Arena, Vancouver, , Canada on 07/27/2019
-Angel of the Winds Arena, Seattle, WA, United States on 07/29/2019
-Moda Center, Portland, OR, United States on 07/30/2019
-Golden 1 Center, Sacramento, CA, United States on 08/01/2019
-Staples Center, Los Angeles, CA, United States on 08/03/2019
-SAP Center, San Jose, CA, United States on 08/04/2019
-Honda Center, Anaheim, CA, United States on 08/05/2019
-Vivint Smart Home Arena, Salt Lake City, UT, United States on 08/07/2019
-Pepsi Center Arena, Denver, CO, United States on 08/08/2019
-United Center, Chicago, IL, United States on 08/10/2019
-Little Caesars Arena, Detroit, MI, United States on 08/12/2019
-TD Garden, Boston, MA, United States on 08/14/2019
-Barclays Center, New York, NY, United States on 08/15/2019
-Wells Fargo Center, Philadelphia, PA, United States on 08/17/2019
-Hersheypark Stadium, Hershey, PA, United States on 08/18/2019
-PNC Arena, Raleigh, NC, United States on 08/20/2019
-State Farm Arena, Atlanta, GA, United States on 08/21/2019
-BB&T Center, Fort Lauderdale, FL, United States on 08/23/2019
-Amway Center, Orlando, FL, United States on 08/24/2019
-Bridgestone Arena, Nashville, TN, United States on 08/26/2019
-FedEx Forum, Memphis, TN, United States on 08/27/2019
-BOK Center, Tulsa, OK, United States on 08/28/2019
-Smoothie King Center, New Orleans, LA, United States on 08/30/2019
-Toyota Center, Houston, TX, United States on 08/31/2019
-American Airlines Arena, Dallas, TX, United States on 09/01/2019
-Cajundome, Lafayette, LA, United States on 09/03/2019
-The Legacy Arena at the BJCC, Birmingham, AL, United States on 09/04/2019
-Enterprise Center, St. Louis, MO, United States on 09/06/2019
-Sprint Center, Kansas City, MO, United States on 09/07/2019
-CHI Health Center, Omaha, NE, United States on 09/08/2019
-Bankers Life Fieldhouse, Indianapolis, IN, United States on 09/10/2019
-Fiserv Forum, Milwaukee, WI, United States on 09/11/2019
-KFC Yum! Center, Louisville, KY, United States on 09/13/2019
-PPG Paints Arena, Pittsburgh, PA, United States on 09/14/2019
-Prudential Center, Newark, NJ, United States on 09/15/2019
-Planet Hollywood Resort & Casino	- Las Vegas, Las Vegas, NV, United States on 04/13/2019
-Planet Hollywood Resort & Casino	- Las Vegas, Las Vegas, NV, United States on 04/19/2019
