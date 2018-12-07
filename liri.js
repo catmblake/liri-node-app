@@ -23,14 +23,14 @@ function axiosGetMovie(argument) {
   var omdbQueryUrl = `http://www.omdbapi.com/?t=${argument}&y=&plot=short&apikey=trilogy`;
   axios.get(omdbQueryUrl)
     .then(function (response) {
-      var title = JSON.stringify(response.data.Title, null, 2);
-      var year = JSON.stringify(response.data.Year, null, 2);
-      var imdbRating = JSON.stringify(response.data.Ratings[0].Value, null, 2);
-      var rotRating = JSON.stringify(response.data.Ratings[1].Value, null, 2);
-      var country = JSON.stringify(response.data.Country, null, 2);
-      var language = JSON.stringify(response.data.Language, null, 2);
-      var plot = JSON.stringify(response.data.Plot, null, 2);
-      var actors = JSON.stringify(response.data.Actors, null, 2);
+      var title = response.data.Title;
+      var year = response.data.Year;
+      var imdbRating = response.data.Ratings[0].Value;
+      var rotRating = response.data.Ratings[1].Value;
+      var country = response.data.Country;
+      var language = response.data.Language;
+      var plot = response.data.Plot;
+      var actors = response.data.Actors;
       var movieInfo = `Title: ${title}\nYear: ${year}\nIMDB Rating: ${imdbRating}\nRotten Tomatoes Rating: ${rotRating}\nCountry: ${country}\nLanguage: ${language}\nPlot: ${plot}\nActors: ${actors}`;
       console.log(movieInfo);
       logCommand(`Command: ${command} ${argument}\nResults:\n${movieInfo}\n`);

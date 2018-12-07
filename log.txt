@@ -77,3 +77,13 @@ Country: "USA"
 Language: "English, Swedish"
 Plot: "A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic."
 Actors: "Leonardo DiCaprio, Kate Winslet, Billy Zane, Kathy Bates"
+Command: movie-this titanic
+Results:
+Title: Titanic
+Year: 1997
+IMDB Rating: 7.8/10
+Rotten Tomatoes Rating: 89%
+Country: USA
+Language: English, Swedish
+Plot: A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.
+Actors: Leonardo DiCaprio, Kate Winslet, Billy Zane, Kathy Bates
