@@ -17,6 +17,8 @@ LIRI uses the following node package managers to process requests:
 liri.js can take in the following commands:
 1. **movie-this ->insert movie name here<-**
   - This command will use axios to query the OMDB API and return information on the movie that was entered. If you do not enter a movie LIRI will provide you with information for the movie Mr. Nobody.
+  ![Image of movie-this]
+  (https://github.com/catmblake/liri-node-app/blob/master/images/movie-this-moviename.png)
 2. **concert-this ->insert band/artist name here<-**
   - This command will use axios to query the Bands In town API and return information on upcoming shows for the artist that was entered. If you do not enter an artist LIRI will prompt you to complete the command. Moment converts the event dates to the MM/DD/YYYY format.
 3. **spotify-this-song ->insert song name here<-**
