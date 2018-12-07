@@ -43,13 +43,15 @@ function axiosGetConcert(argument) {
   var bandsQueryUrl = `https://rest.bandsintown.com/artists/${argument}/events?app_id=codingbootcamp`;
   axios.get(bandsQueryUrl)
     .then(function (response) {
+      console.log(`Upcoming ${argument} shows:`);
       for (var i = 0; i < response.data.length; i++) {
         var concertVenue = response.data[i].venue.name;
         var city = response.data[i].venue.city;
+        var region = response.data[i].venue.region;
         var country = response.data[i].venue.country;
         var date = moment(response.data[i].venue.datetime);
         var dateConverted = moment(date).format("MM/DD/YYYY")
-        console.log(`Concert Venue: ${concertVenue},\nLocation: ${city}, ${country}\nEvent Date: ${dateConverted}`);
+        console.log(`${i+1}. ${concertVenue}, ${city}, ${region}, ${country} on ${dateConverted}`);
       };
       logCommand();
     })
