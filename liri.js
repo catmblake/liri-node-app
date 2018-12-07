@@ -39,7 +39,7 @@ function axiosGetMovie(argument) {
     })
 };
 // declaring function for axios concert data retrieval from bands in town and display results
-function axiosGetConcert() {
+function axiosGetConcert(argument) {
   var bandsQueryUrl = `https://rest.bandsintown.com/artists/${argument}/events?app_id=codingbootcamp`;
   axios.get(bandsQueryUrl)
     .then(function (response) {
@@ -82,7 +82,7 @@ if (command === "movie-this" && argument) {
 };
 // setting conditions to run get concert function for the user's selected artist
 if (command === "concert-this" && argument) {
-  axiosGetConcert();
+  axiosGetConcert(argument);
 } else if (command === "concert-this" && !argument) {
   console.log("Please choose an artist");
 };
@@ -98,7 +98,13 @@ if (command === "do-what-it-says") {
     if (error) {
       return console.log(error);
     }
-    var inputArr = data.split(",")
+    var inputArr = data.split(",");
+    if (inputArr[0] === "spotify-this-song") {
     spotifyThis(inputArr[0], inputArr[1]);
+    } else if (inputArr[0] === "concert-this") {
+      axiosGetConcert(inputArr[1]);
+    } else if (inputArr[0] === "movie-this") {
+      axiosGetMovie(inputArr[1]);
+    }
   })
 };
