@@ -53,7 +53,7 @@ function axiosGetConcert(argument) {
         var country = response.data[i].venue.country;
         var date = moment(response.data[i].datetime);
         var dateConverted = moment(date).format("MM/DD/YYYY");
-        console.log(`${i+1}. ${concertVenue}, ${city}, ${region}, ${country} on ${dateConverted}`);
+        console.log(`${i + 1}. ${concertVenue}, ${city}, ${region}, ${country} on ${dateConverted}`);
         logCommand(`${concertVenue}, ${city}, ${region}, ${country} on ${dateConverted}\n`);
       };
     })
@@ -98,7 +98,7 @@ if (command === "spotify-this-song" && argument) {
 } else if (command === "spotify-this-song" && !argument) {
   spotifyThis("the sign ace of base");
 };
-// setting condition read random.txt and run the specified command and argument it contains
+// setting condition to read random.txt and run the specified command and argument it contains
 if (command === "do-what-it-says") {
   fs.readFile("random.txt", "utf8", function (error, data) {
     if (error) {
@@ -106,7 +106,7 @@ if (command === "do-what-it-says") {
     }
     var inputArr = data.split(",");
     if (inputArr[0] === "spotify-this-song") {
-    spotifyThis(inputArr[1]);
+      spotifyThis(inputArr[1]);
     } else if (inputArr[0] === "concert-this") {
       axiosGetConcert(inputArr[1]);
     } else if (inputArr[0] === "movie-this") {
