@@ -11,7 +11,7 @@ var argument = process.argv.slice(3).join(" ");
 var divider = `\n----------\n\n`;
 // declaring function to record user input and LIRI response in the log.txt file
 function logCommand(param) {
-  fs.appendFile("log.txt", param , function (err) {
+  fs.appendFile("log.txt", param, function (err) {
     if (err) {
       console.log(`\nError logging information to log.txt\n${divider}`);
     }
@@ -47,31 +47,31 @@ function axiosGetMovie() {
 };
 // declaring function for axios concert data retrieval from bands in town and display results
 function axiosGetConcert() {
-  if (argument){
-  logCommand(`${divider}Command: ${command} ${argument}\n\nUpcoming shows for ${argument} are:\n`);
-  var bandsQueryUrl = `https://rest.bandsintown.com/artists/${argument}/events?app_id=codingbootcamp`;
-  axios.get(bandsQueryUrl)
-    .then(function (response) {
-      var bandsInfo = response.data;
-      console.log(`\nUpcoming ${argument} shows:`);
-      for (var i = 0; i < bandsInfo.length; i++) {
-        var concertVenue = bandsInfo[i].venue.name;
-        var city = bandsInfo[i].venue.city;
-        var region = bandsInfo[i].venue.region;
-        var country = bandsInfo[i].venue.country;
-        var date = moment(bandsInfo[i].datetime, "YYYY-MM-DDTHH:mm:ss");
-        var dateConverted = moment(date).format("MM/DD/YYYY");
-        console.log(`\n${i + 1}. ${concertVenue}, ${city}, ${region}, ${country} on ${dateConverted} \n`);
-        logCommand(`\n${concertVenue}, ${city}, ${region}, ${country} on ${dateConverted}\n`);
-      };
-    })
-    .catch(function (error) {
-      console.log(`\nLIRI says: Sorry I can't seem to find your artist :(\n${divider}`);
-    })
-} else {
-  logCommand(`${divider}Command: ${command}\n\nPlease choose an artist and try again\n`);
-  console.log(`\nLIRI says: Please choose an artist and try again \n${divider}`);
-}
+  if (argument) {
+    logCommand(`${divider}Command: ${command} ${argument}\n\nUpcoming shows for ${argument} are:\n`);
+    var bandsQueryUrl = `https://rest.bandsintown.com/artists/${argument}/events?app_id=codingbootcamp`;
+    axios.get(bandsQueryUrl)
+      .then(function (response) {
+        var bandsInfo = response.data;
+        console.log(`\nUpcoming ${argument} shows:`);
+        for (var i = 0; i < bandsInfo.length; i++) {
+          var concertVenue = bandsInfo[i].venue.name;
+          var city = bandsInfo[i].venue.city;
+          var region = bandsInfo[i].venue.region;
+          var country = bandsInfo[i].venue.country;
+          var date = moment(bandsInfo[i].datetime, "YYYY-MM-DDTHH:mm:ss");
+          var dateConverted = moment(date).format("MM/DD/YYYY");
+          console.log(`\n${i + 1}. ${concertVenue}, ${city}, ${region}, ${country} on ${dateConverted} \n`);
+          logCommand(`\n${concertVenue}, ${city}, ${region}, ${country} on ${dateConverted}\n`);
+        };
+      })
+      .catch(function (error) {
+        console.log(`\nLIRI says: Sorry I can't seem to find your artist :(\n${divider}`);
+      })
+  } else {
+    logCommand(`${divider}Command: ${command}\n\nPlease choose an artist and try again\n`);
+    console.log(`\nLIRI says: Please choose an artist and try again \n${divider}`);
+  }
 };
 // declaring function for spotify data retrieval and display results
 function spotifyThis() {
@@ -117,18 +117,18 @@ function readAndRun() {
 // using switch case to determine user's command and calling the corresponsing function
 switch (command) {
   case "movie-this":
-  axiosGetMovie();
-  break;
+    axiosGetMovie();
+    break;
 
   case "concert-this":
-  axiosGetConcert();
-  break;
+    axiosGetConcert();
+    break;
 
   case "spotify-this-song":
-  spotifyThis();
-  break;
-  
+    spotifyThis();
+    break;
+
   case "do-what-it-says":
-  readAndRun();
-  break;
+    readAndRun();
+    break;
 };
