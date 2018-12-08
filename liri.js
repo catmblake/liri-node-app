@@ -5,112 +5,130 @@ var fs = require("fs");
 var Spotify = require("node-spotify-api");
 var axios = require("axios");
 var moment = require("moment");
-
-// declaring user inputs as global variables
+// declaring user inputs as global variables and a divider variable for formatting responses
 var command = process.argv[2];
 var argument = process.argv.slice(3).join(" ");
-
-// declaring function to record user input in the log.txt file
+var divider = `\n----------\n\n`;
+// declaring function to record user input and LIRI response in the log.txt file
 function logCommand(param) {
-  fs.appendFile("log.txt", param, function (err) {
+  fs.appendFile("log.txt", param , function (err) {
     if (err) {
-      console.log(err);
+      console.log(`\nError logging information to log.txt\n${divider}`);
     }
   })
 };
 // declaring function for axios movie data retrieval from omdb and display results
-function axiosGetMovie(argument) {
-  var omdbQueryUrl = `http://www.omdbapi.com/?t=${argument}&y=&plot=short&apikey=trilogy`;
+function axiosGetMovie() {
+  var movieName = "";
+  if (argument) {
+    movieName = argument;
+  } else {
+    movieName = "Mr Nobody";
+  }
+  var omdbQueryUrl = `http://www.omdbapi.com/?t=${movieName}&y=&plot=short&apikey=trilogy`;
   axios.get(omdbQueryUrl)
     .then(function (response) {
-      var title = response.data.Title;
-      var year = response.data.Year;
-      var imdbRating = response.data.Ratings[0].Value;
-      var rotRating = response.data.Ratings[1].Value;
-      var country = response.data.Country;
-      var language = response.data.Language;
-      var plot = response.data.Plot;
-      var actors = response.data.Actors;
-      var movieInfo = `Title: ${title}\nYear: ${year}\nIMDB Rating: ${imdbRating}\nRotten Tomatoes Rating: ${rotRating}\nCountry: ${country}\nLanguage: ${language}\nPlot: ${plot}\nActors: ${actors}`;
-      console.log(movieInfo);
-      logCommand(`Command: ${command} ${argument}\nResults:\n${movieInfo}\n`);
+      omdbInfo = response.data;
+      var title = omdbInfo.Title;
+      var year = omdbInfo.Year;
+      var imdbRating = omdbInfo.Ratings[0].Value;
+      var rotRating = omdbInfo.Ratings[1].Value;
+      var country = omdbInfo.Country;
+      var language = omdbInfo.Language;
+      var plot = omdbInfo.Plot;
+      var actors = omdbInfo.Actors;
+      var movieInfo = `\nTitle: ${title}\n\nYear: ${year}\n\nIMDB Rating: ${imdbRating}\n\nRotten Tomatoes Rating: ${rotRating}\n\nCountry: ${country}\n\nLanguage: ${language}\n\nPlot: ${plot}\n\nActors: ${actors}`;
+      console.log(`\n${movieInfo} \n${divider}`);
+      logCommand(`${divider}Command: ${command} ${argument}\n\nResults:\n${movieInfo}\n`);
     })
     .catch(function (error) {
-      console.log(error);
+      console.log(`\nLIRI says: Sorry I can't seem to find your movie :(\n${divider}`);
     })
 };
 // declaring function for axios concert data retrieval from bands in town and display results
-function axiosGetConcert(argument) {
-  logCommand(`Command: ${command} ${argument}\nResults:\n`);
+function axiosGetConcert() {
+  if (argument){
+  logCommand(`${divider}Command: ${command} ${argument}\n\nUpcoming shows for ${argument} are:\n`);
   var bandsQueryUrl = `https://rest.bandsintown.com/artists/${argument}/events?app_id=codingbootcamp`;
   axios.get(bandsQueryUrl)
     .then(function (response) {
-      console.log(`Upcoming ${argument} shows:`);
-      for (var i = 0; i < response.data.length; i++) {
-        var concertVenue = response.data[i].venue.name;
-        var city = response.data[i].venue.city;
-        var region = response.data[i].venue.region;
-        var country = response.data[i].venue.country;
-        var date = moment(response.data[i].datetime);
+      var bandsInfo = response.data;
+      console.log(`\nUpcoming ${argument} shows:`);
+      for (var i = 0; i < bandsInfo.length; i++) {
+        var concertVenue = bandsInfo[i].venue.name;
+        var city = bandsInfo[i].venue.city;
+        var region = bandsInfo[i].venue.region;
+        var country = bandsInfo[i].venue.country;
+        var date = moment(bandsInfo[i].datetime, "YYYY-MM-DDTHH:mm:ss");
         var dateConverted = moment(date).format("MM/DD/YYYY");
-        console.log(`${i + 1}. ${concertVenue}, ${city}, ${region}, ${country} on ${dateConverted}`);
-        logCommand(`${concertVenue}, ${city}, ${region}, ${country} on ${dateConverted}\n`);
+        console.log(`\n${i + 1}. ${concertVenue}, ${city}, ${region}, ${country} on ${dateConverted} \n`);
+        logCommand(`\n${concertVenue}, ${city}, ${region}, ${country} on ${dateConverted}\n`);
       };
     })
     .catch(function (error) {
-      console.log(error);
+      console.log(`\nLIRI says: Sorry I can't seem to find your artist :(\n${divider}`);
     })
+} else {
+  logCommand(`${divider}Command: ${command}\n\nPlease choose an artist and try again\n`);
+  console.log(`\nLIRI says: Please choose an artist and try again \n${divider}`);
+}
 };
 // declaring function for spotify data retrieval and display results
-function spotifyThis(argument) {
+function spotifyThis() {
   var spotify = new Spotify(keys.spotify);
+  var song = "";
+  if (argument) {
+    song = argument;
+  } else {
+    song = "The Sign Ace of Base"
+  }
   spotify
-    .search({ type: 'track', query: argument, limit: 1 })
+    .search({ type: 'track', query: song, limit: 1 })
     .then(function (response) {
       var artist = response.tracks.items[0].artists[0].name;
       var songName = response.tracks.items[0].name;
       var album = response.tracks.items[0].album.name;
       var songUrl = response.tracks.items[0].external_urls.spotify;
-      var spotifyInfo = `Artist: ${artist}\nSong: ${songName}\nAlbum: ${album}\nLink: ${songUrl}`;
-      console.log(spotifyInfo);
-      logCommand(`Command: ${command} ${argument}\nResults:\n${spotifyInfo}\n`);
+      var spotifyInfo = `\nArtist: ${artist}\n\nSong: ${songName}\n\nAlbum: ${album}\n\nLink: ${songUrl}`;
+      console.log(`${spotifyInfo} \n${divider}`);
+      logCommand(`${divider}Command: ${command} ${argument}\n\nResults:\n${spotifyInfo}\n`);
     })
     .catch(function (err) {
-      console.log(err);
+      console.log(`\nLIRI says: Sorry I can't seem to find your song :(\n${divider}`);
     })
 };
-// setting conditions to run get movie function for the user's selected movie or Mr. Nobody
-if (command === "movie-this" && argument) {
-  axiosGetMovie(argument);
-} else if (command === "movie-this" && !argument) {
-  axiosGetMovie("Mr Nobody");
-};
-// setting conditions to run get concert function for the user's selected artist
-if (command === "concert-this" && argument) {
-  axiosGetConcert(argument);
-} else if (command === "concert-this" && !argument) {
-  logCommand(`Command: ${command}\nPlease choose an artist and try again\n`);
-  console.log("Please choose an artist and try again");
-};
-// setting conditions to run spotify function for the user's selected song or the sign
-if (command === "spotify-this-song" && argument) {
-  spotifyThis(argument);
-} else if (command === "spotify-this-song" && !argument) {
-  spotifyThis("the sign ace of base");
-};
-// setting condition to read random.txt and run the specified command and argument it contains
-if (command === "do-what-it-says") {
+// declaring function for reading the random.txt file and running the command within it
+function readAndRun() {
   fs.readFile("random.txt", "utf8", function (error, data) {
     if (error) {
-      return console.log(error);
+      return console.log(`\nLIRI says: Ooops I'm having trouble reading your instructions :(\n${divider}`);
     }
     var inputArr = data.split(",");
+    argument = inputArr[1];
     if (inputArr[0] === "spotify-this-song") {
-      spotifyThis(inputArr[1]);
+      spotifyThis();
     } else if (inputArr[0] === "concert-this") {
-      axiosGetConcert(inputArr[1]);
+      axiosGetConcert();
     } else if (inputArr[0] === "movie-this") {
-      axiosGetMovie(inputArr[1]);
+      axiosGetMovie();
     }
   })
+};
+// using switch case to determine user's command and calling the corresponsing function
+switch (command) {
+  case "movie-this":
+  axiosGetMovie();
+  break;
+
+  case "concert-this":
+  axiosGetConcert();
+  break;
+
+  case "spotify-this-song":
+  spotifyThis();
+  break;
+  
+  case "do-what-it-says":
+  readAndRun();
+  break;
 };
