@@ -13,7 +13,7 @@ var divider = `\n----------\n\n`;
 function logCommand(param) {
   fs.appendFile("log.txt", param, function (err) {
     if (err) {
-      console.log(`\nError logging information\n ${err}\n${divider}`);
+      console.log(`\nError logging information\n${err}\n${divider}`);
     }
   })
 };
@@ -42,7 +42,7 @@ function axiosGetMovie() {
       logCommand(`${divider}Command: ${command} ${argument}\n\nResults:\n${movieInfo}\n`);
     })
     .catch(function (error) {
-      console.log(`\nLIRI says: Sorry I can't seem to find your movie\n ${error}\n${divider}`);
+      console.log(`\nLIRI says: Sorry I can't seem to find your movie\n${error}\n${divider}`);
     })
 };
 // declaring function for axios concert data retrieval from bands in town and display results
@@ -72,7 +72,7 @@ function axiosGetConcert() {
       }
       })
       .catch(function (error) {
-        console.log(`\nLIRI says: Sorry I can't seem to find your artist\n ${error}\n${divider}`);
+        console.log(`\nLIRI says: Sorry I can't seem to find your artist\n${error}\n${divider}`);
       })
   } else {
     logCommand(`${divider}Command: ${command}\n\nPlease choose an artist and try again\n`);
