@@ -13,7 +13,7 @@ var divider = `\n----------\n\n`;
 function logCommand(param) {
   fs.appendFile("log.txt", param, function (err) {
     if (err) {
-      console.log(`\nError logging information\n${err}\n${divider}`);
+      console.log(`\nError logging information\n\n${err}\n${divider}`);
     }
   })
 };
@@ -24,7 +24,7 @@ function axiosGetMovie() {
     movieName = argument;
   } else {
     movieName = "Mr Nobody";
-  }
+  };
   var omdbQueryUrl = `http://www.omdbapi.com/?t=${movieName}&y=&plot=short&apikey=trilogy`;
   axios.get(omdbQueryUrl)
     .then(function (response) {
@@ -42,19 +42,18 @@ function axiosGetMovie() {
       logCommand(`${divider}Command: ${command} ${argument}\n\nResults:\n${movieInfo}\n`);
     })
     .catch(function (error) {
-      console.log(`\nLIRI says: Sorry I can't seem to find your movie\n${error}\n${divider}`);
+      console.log(`\nLIRI says: Sorry I can't seem to find your movie\n\n${error}\n${divider}`);
     })
 };
 // declaring function for axios concert data retrieval from bands in town and display results
 function axiosGetConcert() {
   if (argument) {
-    logCommand(`${divider}Command: ${command} ${argument}\n\n`);
     var bandsQueryUrl = `https://rest.bandsintown.com/artists/${argument}/events?app_id=codingbootcamp`;
     axios.get(bandsQueryUrl)
       .then(function (response) {
         var bandsInfo = response.data;
         if (bandsInfo.length > 0) {
-          logCommand(`Upcoming shows for ${argument} are:\n`)
+          logCommand(`${divider}Command: ${command} ${argument}\n\nUpcoming shows for ${argument} are:\n`);
         console.log(`\nUpcoming ${argument} shows:`);
         for (var i = 0; i < bandsInfo.length; i++) {
           var concertVenue = bandsInfo[i].venue.name;
@@ -67,17 +66,17 @@ function axiosGetConcert() {
           logCommand(`\n${concertVenue}, ${city}, ${region}, ${country} on ${dateConverted}\n`);
         };
       } else {
-        logCommand(`Looks like ${argument} is not touring right now\n`)
+        logCommand(`${divider}Command: ${command} ${argument}\n\nLooks like ${argument} is not touring right now\n`)
         console.log(`\nLIRI says: Looks like ${argument} is not touring right now\n${divider}`)
-      }
+      };
       })
       .catch(function (error) {
-        console.log(`\nLIRI says: Sorry I can't seem to find your artist\n${error}\n${divider}`);
+        console.log(`\nLIRI says: Sorry I can't seem to find your artist\n\n${error}\n${divider}`);
       })
   } else {
     logCommand(`${divider}Command: ${command}\n\nPlease choose an artist and try again\n`);
     console.log(`\nLIRI says: Please choose an artist and try again\n${divider}`);
-  }
+  };
 };
 // declaring function for spotify data retrieval and display results
 function spotifyThis() {
@@ -87,7 +86,7 @@ function spotifyThis() {
     song = argument;
   } else {
     song = "The Sign Ace of Base"
-  }
+  };
   spotify
     .search({ type: 'track', query: song, limit: 1 })
     .then(function (response) {
@@ -100,15 +99,15 @@ function spotifyThis() {
       logCommand(`${divider}Command: ${command} ${argument}\n\nResults:\n${spotifyInfo}\n`);
     })
     .catch(function (err) {
-      console.log(`\nLIRI says: Sorry I can't seem to find your song\n${err}\n${divider}`);
+      console.log(`\nLIRI says: Sorry I can't seem to find your song\n\n${err}\n${divider}`);
     })
 };
 // declaring function for reading the random.txt file and running the command within it
 function readAndRun() {
   fs.readFile("random.txt", "utf8", function (error, data) {
     if (error) {
-      return console.log(`\nLIRI says: Ooops I'm having trouble reading your instructions\n${error}\n${divider}`);
-    }
+      return console.log(`\nLIRI says: Ooops I'm having trouble reading your instructions\n\n${error}\n${divider}`);
+    };
     var inputArr = data.split(",");
     argument = inputArr[1];
     if (inputArr[0] === "spotify-this-song") {
@@ -117,7 +116,7 @@ function readAndRun() {
       axiosGetConcert();
     } else if (inputArr[0] === "movie-this") {
       axiosGetMovie();
-    }
+    };
   })
 };
 // using switch case to determine user's command and calling the corresponsing function
