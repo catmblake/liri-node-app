@@ -26,6 +26,8 @@ liri.js can take in the following commands:
 LIRI logs each valid command entered and the corresponding results in the log.txt file.
 
 ### LIRI in Action
+Watch a quick demonstration of LIRI in action at https://drive.google.com/file/d/120tq8GCB9_J7KLDr-zLNUJQnpkFSX5Tp/view.
+
 ![movie-this](https://github.com/catmblake/liri-node-app/blob/master/images/movie-this-moviename.png)
 ![concert-this](https://github.com/catmblake/liri-node-app/blob/master/images/concert-this-artistname.png)
 ![spotify-this-song](https://github.com/catmblake/liri-node-app/blob/master/images/spotify-this-song-songname.png)
