@@ -28,8 +28,9 @@ LIRI logs each valid command entered and the corresponding results in the log.tx
 ### LIRI in Action
 Watch a quick demonstration of LIRI in action at https://drive.google.com/file/d/120tq8GCB9_J7KLDr-zLNUJQnpkFSX5Tp/view.
 
-![movie-this](https://github.com/catmblake/liri-node-app/blob/master/images/movie-this-moviename.png)
-![concert-this](https://github.com/catmblake/liri-node-app/blob/master/images/concert-this-artistname.png)
-![spotify-this-song](https://github.com/catmblake/liri-node-app/blob/master/images/spotify-this-song-songname.png)
-![do-what-it-says](https://github.com/catmblake/liri-node-app/blob/master/images/do-what-it-says-2.png)
+![movie-this](https://github.com/catmblake/liri-node-app/blob/master/images/movie-this.png)
+![concert-this](https://github.com/catmblake/liri-node-app/blob/master/images/concert-this.png)
+![spotify-this-song](https://github.com/catmblake/liri-node-app/blob/master/images/spotify-this-song.png)
+![do-what-it-says](https://github.com/catmblake/liri-node-app/blob/master/images/do-what-it-says.png)
+
 
